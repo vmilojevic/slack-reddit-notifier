@@ -1,0 +1,45 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="auto.increment" value="true" dbms="mysql"/>
+    <property name="bigint.type" value="BIGINT UNSIGNED" dbms="mysql"/>
+    <property name="date.type" value="DATE" dbms="mysql"/>
+
+    <changeSet id="RN-1" author="vladan">
+        <createTable tableName="keyword">
+            <column name="word" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="channel_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="keyword"
+                       columnNames="word, channel_id"/>
+    </changeSet>
+
+    <changeSet id="RN-2" author="vladan">
+        <createTable tableName="keyword_occurrence">
+            <column name="id" type="${bigint.type}" autoIncrement="${auto.increment}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="word" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subreddit" type="varchar(31)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sentiment" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="${date.type}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
